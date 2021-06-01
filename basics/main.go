@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	path := "Resources/lena.png"
+	path := "Resources/test.png"
 	img := IMRead(path, IMReadColor)
 
 	if img.Empty() {

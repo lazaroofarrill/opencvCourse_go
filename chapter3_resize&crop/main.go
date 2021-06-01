@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	path := "Resources/lena.png"
+	path := "Resources/test.png"
 
 	img := gocv.IMRead(path, gocv.IMReadUnchanged)
 	imgResize := gocv.NewMat()
@@ -21,7 +21,7 @@ func main() {
 	winOg.ResizeWindow(img.Size()[0], img.Size()[1])
 	winRes := gocv.NewWindow("resized")
 	defer winRes.Close()
-	winRes.ResizeWindow(imgResize.Size()[1], imgResize.Size()[0])
+	winRes.ResizeWindow(imgResize.Size()[0], imgResize.Size()[1])
 
 	roi := image.Rectangle{
 		Min: image.Point{X: 0, Y: 0}, Max: image.Point{X: 300, Y: 450},
@@ -36,7 +36,7 @@ func main() {
 	winCrop := gocv.NewWindow("cropped")
 	defer winCrop.Close()
 	sizes := cropped.Size()
-	winCrop.ResizeWindow(sizes[1], sizes[0])
+	winCrop.ResizeWindow(sizes[0], sizes[1])
 
 	for {
 		winOg.IMShow(img)
