@@ -3,6 +3,7 @@ package main
 import (
 	. "gocv.io/x/gocv"
 	"image"
+	"image/color"
 )
 
 const h = 350
@@ -25,11 +26,19 @@ func main() {
 	WarpPerspective(img, &warpedImage, tm, image.Point{X: w, Y: h})
 
 	win := NewWindow("cards")
-	size := warpedImage.Size()
+	size := img.Size()
 	win.ResizeWindow(size[1], size[0])
+	win2 := NewWindow("king")
+	size = warpedImage.Size()
+	win2.ResizeWindow(size[1], size[0])
+
+	for _, point := range src {
+		Circle(&img, point, 10, color.RGBA{R: 255}, -1)
+	}
 
 	for {
-		win.IMShow(warpedImage)
+		win.IMShow(img)
+		win2.IMShow(warpedImage)
 		WaitKey(0)
 	}
 }
